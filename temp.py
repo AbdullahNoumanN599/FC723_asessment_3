@@ -4,6 +4,8 @@ Spyder Editor
 
 This is a temporary script file.
 """
+import GAZI_ALMUTAIRI as ga
+import math
 import tkinter as tk
 root = tk.Tk()
 root.geometry("800x600")
@@ -21,6 +23,20 @@ def ButtonDeletingText():
 def ButtonDeletingAllText():
     CalcScreen.delete(0,tk.END)
  #we create two functions to serve as del buttons.
+
+def Calculation():
+    calc_input = CalcScreen.get()
+    try:
+        Math_functions = {'math': math, 'sin':math.sin, 'cos': math.cos, 'tan':math.tan, 'arcsin': math.asin, 'arccos':math.acos,
+                          'arctan':math.atan,'sqrroot':math.sqrt}
+        
+        result = eval(calc_input, {"__builtins__": None}, Math_functions)  
+        CalcScreen.delete(0, tk.END)
+        CalcScreen.insert(0, result)
+    except Exception as e:
+        CalcScreen.delete(0, tk.END)
+        CalcScreen.insert(0, "Error")
+        print(f"Error: {e}")
 
 class button:
     def __init__(self,root,NameInString,rowx,columny):
@@ -42,7 +58,7 @@ button7 = button(root, "7", 9, 1)
 button8 = button(root, "8", 9, 2)
 button9 = button(root, "9", 9, 3)
 buttonDiv = button(root, "/", 11, 4)
-buttonmult =  button(root, "x", 10, 4)
+buttonmult =  button(root, "*", 8, 4)
 buttonadd = button(root, "+", 9, 4)
 buttonleftpara = button(root, "(", 12, 1)
 buttonrightpara = button(root, ")", 12, 3)
@@ -53,13 +69,15 @@ buttontan = button(root, "tan", 8, 3)
 buttonarcsin = button(root, "arcsin", 7, 1)
 buttonarccos = button(root, "arccos", 7, 2)
 buttonarctan = button(root, "arctan", 7, 3)
-buttonsqr = button(root, "sqr", 6, 1)
+buttonsqr = tk.Button(root, text="X²", command=lambda : ButtonsWritingText("**2"))
+buttonsqr.grid(row=6, column=1, sticky="nsew")
 buttonsqrroot = button(root, "sqr root", 6, 2)
-buttonequal = button(root, "=", 6,3)
 ButtonDel = tk.Button(root, text="Del",command= ButtonDeletingText)
-ButtonDel.grid(row=8,column=4,sticky="nsew")
+ButtonDel.grid(row=7,column=4,sticky="nsew")
 ButtonAC = tk.Button(root, text="AC",command=ButtonDeletingAllText)
-ButtonAC.grid(row=7,column=4,sticky="nsew")
+ButtonAC.grid(row=6,column=4,sticky="nsew")
+ButtonEqual = tk.Button(root,text="=",command=Calculation)
+ButtonEqual.grid(row=12,column=4,sticky="nsew")
 #some buttons are exceptions in function and thus werent created as
 #an object of the button class
 
