@@ -26,10 +26,16 @@ def ButtonDeletingAllText():
 
 def Calculation():
     calc_input = CalcScreen.get()
+
     try:
-        Math_functions = {'math': math, 'sin':math.sin, 'cos': math.cos, 'tan':math.tan, 'arcsin': math.asin, 'arccos':math.acos,
-                          'arctan':math.atan,'sqrroot':math.sqrt}
-        
+        Math_functions = {'math': math, 'sin':lambda x : math.sin(math.radians(x)), 
+                          'cos': lambda x : math.cos(math.radians(x)), 
+                          'tan':lambda x : math.tan(math.radians(x)), 
+                          'arcsin': lambda x: math.asin(math.radians(x)), 
+                          'arccos':lambda x : math.acos(math.radians(x)),
+                          'arctan':lambda x : math.atan(math.radians(x)),'sqrt': math.sqrt, 
+                          }
+
         result = eval(calc_input, {"__builtins__": None}, Math_functions)  
         CalcScreen.delete(0, tk.END)
         CalcScreen.insert(0, result)
@@ -71,13 +77,14 @@ buttonarccos = button(root, "arccos", 7, 2)
 buttonarctan = button(root, "arctan", 7, 3)
 buttonsqr = tk.Button(root, text="X²", command=lambda : ButtonsWritingText("**2"))
 buttonsqr.grid(row=6, column=1, sticky="nsew")
-buttonsqrroot = button(root, "sqr root", 6, 2)
+buttonsqrroot = button(root, "sqrt", 6, 2)
 ButtonDel = tk.Button(root, text="Del",command= ButtonDeletingText)
 ButtonDel.grid(row=7,column=4,sticky="nsew")
 ButtonAC = tk.Button(root, text="AC",command=ButtonDeletingAllText)
 ButtonAC.grid(row=6,column=4,sticky="nsew")
 ButtonEqual = tk.Button(root,text="=",command=Calculation)
-ButtonEqual.grid(row=12,column=4,sticky="nsew")
+ButtonEqual.grid(row=6,column=3,sticky="nsew")
+buttondot = button(root, ".", 12, 4)
 #some buttons are exceptions in function and thus werent created as
 #an object of the button class
 
