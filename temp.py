@@ -49,7 +49,7 @@ class button:
         self.NameInString= NameInString 
         self.button = tk.Button(root, text = self.NameInString, command= lambda: ButtonsWritingText(NameInString))
         self.button.grid(row=rowx, column=columny, sticky="nsew")
-    
+    #lambda is used to assign the function with a variable without calling the function
 
 #a class for our buttons to make the process faster,cleaner and easier
 
@@ -95,8 +95,7 @@ for i in range (6, 13):
 for j in range(1,5):
     root.grid_columnconfigure(j, weight = 1)
 
-#two for loops to ensure that the buttons aren't too small and too spread out
-#for loops make this simpler and easier
+#for loop to insure that the buttons cover the entire window
 
 
 
